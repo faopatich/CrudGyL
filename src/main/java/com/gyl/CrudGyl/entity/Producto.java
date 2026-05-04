@@ -1,10 +1,7 @@
 package com.gyl.CrudGyl.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name="productos")
@@ -27,5 +24,7 @@ public class Producto {
     @Column(nullable=false)
     private Integer stock;
 
-
+    @ManyToOne
+    @JoinColumn(name = "id_tipo_producto", nullable = false)
+    private TipoProducto tipoProducto;
 }
