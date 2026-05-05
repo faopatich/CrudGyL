@@ -25,6 +25,10 @@ public class Producto {
     private Integer stock;
 
     @ManyToOne
-    @JoinColumn(name = "id_tipo_producto", nullable = false)
+    @JoinColumn(name = "idTipoProducto", nullable = false)
     private TipoProducto tipoProducto;
+
+    @Column(nullable = false)
+    private Boolean activo = true;
 }
+

@@ -44,12 +44,22 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
+    public List<ProductResponseDto> listarActivos() {
+        return productoRepository.findByActivoTrue()
+                .stream()
+                .map(ProductoMapper::toResponseDto)
+                .toList();
+    }
+
+    @Override
     public ProductResponseDto buscarPorId(Long id) {
-        return productoRepository.findById(id)
-                .map (ProductoMapper::toResponseDto)
-                .orElseThrow(()-> new RecursoNoEncontradoException(
-                        "No se encontro el ID" + id
+        Producto producto = productoRepository.findById(id)
+                .filter(Producto::getActivo)
+                .orElseThrow(() -> new RecursoNoEncontradoException(
+                        "No se encontró el ID " + id
                 ));
+
+        return ProductoMapper.toResponseDto(producto);
     }
 
     @Override
@@ -69,10 +79,11 @@ public class ProductoServiceImpl implements ProductoService {
     public void eliminar(Long id){
         Producto producto = productoRepository.findById(id)
                 .orElseThrow(() -> new RecursoNoEncontradoException(
-                        "No se encontró el id" + id
+                        "No se encontró el id " + id
                 ));
 
-        productoRepository.delete(producto);
+        producto.setActivo(false);
+        productoRepository.save(producto);
     }
 }
 

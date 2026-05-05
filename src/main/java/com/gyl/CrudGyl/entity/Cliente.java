@@ -32,4 +32,7 @@ public class Cliente {
 
     @Column(nullable = false)
     private String direccionCliente;
+
+    @Column(nullable = false)
+    private Boolean activo = true;
 }
