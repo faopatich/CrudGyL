@@ -1,7 +1,7 @@
 package com.gyl.CrudGyl.service;
 
-import com.gyl.CrudGyl.dto.DetalleVentaRequestDto;
-import com.gyl.CrudGyl.dto.DetalleVentaResponseDto;
+import com.gyl.CrudGyl.dto.request.DetalleVentaRequestDto;
+import com.gyl.CrudGyl.dto.response.DetalleVentaResponseDto;
 
 import java.util.List;
 

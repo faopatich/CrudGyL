@@ -1,11 +1,13 @@
 package com.gyl.CrudGyl.service.impl;
 
-import com.gyl.CrudGyl.dto.ProductRequestDto;
-import com.gyl.CrudGyl.dto.ProductResponseDto;
+import com.gyl.CrudGyl.dto.request.ProductRequestDto;
+import com.gyl.CrudGyl.dto.response.ProductResponseDto;
 import com.gyl.CrudGyl.entity.Producto;
+import com.gyl.CrudGyl.entity.TipoProducto;
 import com.gyl.CrudGyl.exception.RecursoNoEncontradoException;
 import com.gyl.CrudGyl.mapper.ProductoMapper;
 import com.gyl.CrudGyl.repository.ProductoRepository;
+import com.gyl.CrudGyl.repository.TipoProductoRepository;
 import com.gyl.CrudGyl.service.ProductoService;
 import org.springframework.stereotype.Service;
 
@@ -14,12 +16,16 @@ import java.util.List;
 @Service
 public class ProductoServiceImpl implements ProductoService {
 
-    private ProductoRepository productoRepository;
+    private final ProductoRepository productoRepository;
+    private final TipoProductoRepository tipoProductoRepository;
 
-    public ProductoServiceImpl(ProductoRepository productoRepository) {
+    public ProductoServiceImpl(
+            ProductoRepository productoRepository,
+            TipoProductoRepository tipoProductoRepository
+    ) {
         this.productoRepository = productoRepository;
+        this.tipoProductoRepository = tipoProductoRepository;
     }
-
     @Override
     public List <ProductResponseDto> busquedaPorNombre(String nombre){
         return productoRepository.findByNombre(nombre)
@@ -30,8 +36,16 @@ public class ProductoServiceImpl implements ProductoService {
 
     @Override
     public ProductResponseDto crear(ProductRequestDto dto) {
+        TipoProducto tipoProducto = tipoProductoRepository.findById(dto.idTipoProducto())
+                .orElseThrow(() -> new RecursoNoEncontradoException(
+                        "No se encontró el tipo de producto con ID " + dto.idTipoProducto()
+                ));
+
         Producto producto = ProductoMapper.toEntity(dto);
+        producto.setTipoProducto(tipoProducto);
+
         Producto guardado = productoRepository.save(producto);
+
         return ProductoMapper.toResponseDto(guardado);
     }
 

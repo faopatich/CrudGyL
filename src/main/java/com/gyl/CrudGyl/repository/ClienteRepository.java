@@ -9,4 +9,7 @@ import java.util.List;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     List<Cliente> findByNombreCliente (String nombreCliente);
+    List<Cliente> findByActivoTrue();
+
+    List<Cliente> findByNombreClienteAndActivoTrue(String nombreCliente);
 }

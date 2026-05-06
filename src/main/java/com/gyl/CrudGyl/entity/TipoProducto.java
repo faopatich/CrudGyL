@@ -12,7 +12,7 @@ import lombok.*;
 public class TipoProducto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idTipoProducto;
 
     @Column(nullable = false, length = 100)

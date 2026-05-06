@@ -12,7 +12,7 @@ import lombok.*;
 public class Producto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable=false, length = 100)
@@ -25,7 +25,7 @@ public class Producto {
     private Integer stock;
 
     @ManyToOne
-    @JoinColumn(name = "idTipoProducto", nullable = false)
+    @JoinColumn(name = "id_tipo_producto", nullable = false)
     private TipoProducto tipoProducto;
 
     @Column(nullable = false)

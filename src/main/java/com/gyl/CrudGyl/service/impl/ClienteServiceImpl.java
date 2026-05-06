@@ -1,7 +1,7 @@
 package com.gyl.CrudGyl.service.impl;
 
-import com.gyl.CrudGyl.dto.ClientResponseDto;
-import com.gyl.CrudGyl.dto.ClientRequestDto;
+import com.gyl.CrudGyl.dto.response.ClientResponseDto;
+import com.gyl.CrudGyl.dto.request.ClientRequestDto;
 import com.gyl.CrudGyl.repository.ClienteRepository;
 import com.gyl.CrudGyl.exception.RecursoNoEncontradoException;
 import com.gyl.CrudGyl.mapper.ClienteMapper;
@@ -20,7 +20,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public List <ClientResponseDto> busquedaPorNombre (String nombreCliente){
-        return clienteRepository.findByNombreCliente(nombreCliente)
+        return clienteRepository.findByNombreClienteAndActivoTrue(nombreCliente)
                 .stream()
                 .map(ClienteMapper::toResponseDto)
                 .toList();
@@ -28,8 +28,8 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public List<ClientResponseDto> listar(){
-        return clienteRepository.findAll()
+    public List<ClientResponseDto> listar() {
+        return clienteRepository.findByActivoTrue()
                 .stream()
                 .map(ClienteMapper::toResponseDto)
                 .toList();
@@ -44,19 +44,23 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public ClientResponseDto buscarPorId(Long idCliente){
-        return clienteRepository.findById(idCliente)
-                .map(ClienteMapper::toResponseDto)
-                .orElseThrow(()-> new RecursoNoEncontradoException(
-                        "No se encontró el ID del cliente" + idCliente
+        Cliente cliente = clienteRepository.findById(idCliente)
+                .filter(Cliente::getActivo)
+                .orElseThrow(() -> new RecursoNoEncontradoException(
+                        "No se encontró el ID del cliente " + idCliente
                 ));
+
+        return ClienteMapper.toResponseDto(cliente);
     }
 
     @Override
     public ClientResponseDto actualizar(Long idCliente, ClientRequestDto dto){
         Cliente cliente = clienteRepository.findById(idCliente)
-                .orElseThrow(()-> new RecursoNoEncontradoException(
-                        "No se encontró el ID del cliente" + idCliente
+                .filter(Cliente::getActivo)
+                .orElseThrow(() -> new RecursoNoEncontradoException(
+                        "No se encontró el ID del cliente " + idCliente
                 ));
+
         ClienteMapper.updateEntity(cliente, dto);
         Cliente guardado = clienteRepository.save(cliente);
         return ClienteMapper.toResponseDto(guardado);
@@ -65,11 +69,12 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public void eliminar(Long idCliente){
         Cliente cliente = clienteRepository.findById(idCliente)
-                .orElseThrow(()-> new RecursoNoEncontradoException(
-                        "No se encontro el ID del cliente" + idCliente
+                .orElseThrow(() -> new RecursoNoEncontradoException(
+                        "No se encontró el ID del cliente " + idCliente
                 ));
-        clienteRepository.delete(cliente);
-    }
 
+        cliente.setActivo(false);
+        clienteRepository.save(cliente);
+    }
 
 }

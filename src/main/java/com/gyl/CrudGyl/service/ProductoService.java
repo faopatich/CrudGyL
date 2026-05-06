@@ -1,7 +1,7 @@
 package com.gyl.CrudGyl.service;
 
-import com.gyl.CrudGyl.dto.ProductRequestDto;
-import com.gyl.CrudGyl.dto.ProductResponseDto;
+import com.gyl.CrudGyl.dto.request.ProductRequestDto;
+import com.gyl.CrudGyl.dto.response.ProductResponseDto;
 
 import java.util.List;
 

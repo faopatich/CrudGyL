@@ -1,4 +1,4 @@
-package com.gyl.CrudGyl.dto;
+package com.gyl.CrudGyl.dto.response;
 
 public record ClientResponseDto(
         Long idCliente,

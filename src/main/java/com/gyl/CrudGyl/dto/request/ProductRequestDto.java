@@ -1,5 +1,6 @@
-package com.gyl.CrudGyl.dto;
+package com.gyl.CrudGyl.dto.request;
 
+import com.gyl.CrudGyl.entity.TipoProducto;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -15,8 +16,13 @@ public record ProductRequestDto(
 
         @NotNull(message = "El stock es obligatorio")
         @Min(value = 0, message = "El stock no puede ser negativo")
-        Integer stock
-) {
+        Integer stock,
+
+        @NotNull(message = "El ID del tipo del producto es obligatorio")
+        Long idTipoProducto
+)
+
+{
 
 
 }

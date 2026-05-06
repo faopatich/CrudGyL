@@ -1,7 +1,7 @@
 package com.gyl.CrudGyl.service.impl;
 
-import com.gyl.CrudGyl.dto.DetalleVentaRequestDto;
-import com.gyl.CrudGyl.dto.DetalleVentaResponseDto;
+import com.gyl.CrudGyl.dto.request.DetalleVentaRequestDto;
+import com.gyl.CrudGyl.dto.response.DetalleVentaResponseDto;
 import com.gyl.CrudGyl.entity.DetalleVenta;
 import com.gyl.CrudGyl.entity.Producto;
 import com.gyl.CrudGyl.entity.Venta;

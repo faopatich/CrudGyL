@@ -1,7 +1,7 @@
 package com.gyl.CrudGyl.controller;
 
-import com.gyl.CrudGyl.dto.ProductRequestDto;
-import com.gyl.CrudGyl.dto.ProductResponseDto;
+import com.gyl.CrudGyl.dto.request.ProductRequestDto;
+import com.gyl.CrudGyl.dto.response.ProductResponseDto;
 import com.gyl.CrudGyl.service.ProductoService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

@@ -1,6 +1,6 @@
 package com.gyl.CrudGyl.mapper;
 
-import com.gyl.CrudGyl.dto.VentaResponseDto;
+import com.gyl.CrudGyl.dto.response.VentaResponseDto;
 import com.gyl.CrudGyl.entity.Cliente;
 import com.gyl.CrudGyl.entity.Venta;
 

@@ -1,7 +1,7 @@
 package com.gyl.CrudGyl.mapper;
 
-import com.gyl.CrudGyl.dto.ClientRequestDto;
-import com.gyl.CrudGyl.dto.ClientResponseDto;
+import com.gyl.CrudGyl.dto.request.ClientRequestDto;
+import com.gyl.CrudGyl.dto.response.ClientResponseDto;
 import com.gyl.CrudGyl.entity.Cliente;
 
 
@@ -36,6 +36,7 @@ public class ClienteMapper {
         cliente.setNombreCliente(dto.nombreCliente());
         cliente.setApellidoCliente(dto.apellidoCliente());
         cliente.setCorreoCliente(dto.correoCliente());
+        cliente.setTelefonoCliente(dto.telefonoCliente());
         cliente.setDireccionCliente(dto.direccionCliente());
 
     }
