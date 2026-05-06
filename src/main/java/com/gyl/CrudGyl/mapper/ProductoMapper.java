@@ -2,6 +2,7 @@ package com.gyl.CrudGyl.mapper;
 
 import com.gyl.CrudGyl.dto.request.ProductRequestDto;
 import com.gyl.CrudGyl.dto.response.ProductResponseDto;
+import com.gyl.CrudGyl.dto.response.TipoProductoResponseDto;
 import com.gyl.CrudGyl.entity.Producto;
 
 public class ProductoMapper {
@@ -23,7 +24,11 @@ public class ProductoMapper {
                 producto.getId(),
                 producto.getNombre(),
                 producto.getPrecio(),
-                producto.getStock()
+                producto.getStock(),
+                new TipoProductoResponseDto(
+                        producto.getTipoProducto().getIdTipoProducto(),
+                        producto.getTipoProducto().getNombreTipoProducto()
+                )
         );
     }
 
