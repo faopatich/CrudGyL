@@ -3,15 +3,12 @@ package com.gyl.CrudGyl.dto.request;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
-public record DetalleVentaRequestDto(
+public record ItemVentaRequestDto(
+        @NotNull(message = "El ID del producto es obligatorio")
+        Long idProducto,
+
         @NotNull(message = "La cantidad es obligatoria")
         @Min(value = 1, message = "La cantidad debe ser mayor a cero")
-        Integer cantidad,
-
-        @NotNull(message = "El ID de venta es obligatorio")
-        Long idVenta,
-
-        @NotNull(message = "El ID de producto es obligatorio")
-        Long idProducto
+        Integer cantidad
 ) {
 }

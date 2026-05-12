@@ -17,10 +17,16 @@ public class DetalleVentaMapper {
             Venta venta,
             Producto producto
     ) {
+        return toEntity(venta, producto, dto.cantidad());
+    }
+
+    public static DetalleVenta toEntity(Venta venta, Producto producto, Integer cantidad) {
+        BigDecimal precioUnitario = BigDecimal.valueOf(producto.getPrecio());
+
         DetalleVenta detalle = new DetalleVenta();
-        detalle.setCantidad(dto.cantidad());
-        detalle.setPrecioUnitario(dto.precioUnitario());
-        detalle.setSubtotal(dto.precioUnitario().multiply(BigDecimal.valueOf(dto.cantidad())));
+        detalle.setCantidad(cantidad);
+        detalle.setPrecioUnitario(precioUnitario);
+        detalle.setSubtotal(precioUnitario.multiply(BigDecimal.valueOf(cantidad)));
         detalle.setVenta(venta);
         detalle.setProducto(producto);
 
@@ -45,9 +51,20 @@ public class DetalleVentaMapper {
             Venta venta,
             Producto producto
     ) {
-        detalle.setCantidad(dto.cantidad());
-        detalle.setPrecioUnitario(dto.precioUnitario());
-        detalle.setSubtotal(dto.precioUnitario().multiply(BigDecimal.valueOf(dto.cantidad())));
+        updateEntity(detalle, venta, producto, dto.cantidad());
+    }
+
+    public static void updateEntity(
+            DetalleVenta detalle,
+            Venta venta,
+            Producto producto,
+            Integer cantidad
+    ) {
+        BigDecimal precioUnitario = BigDecimal.valueOf(producto.getPrecio());
+
+        detalle.setCantidad(cantidad);
+        detalle.setPrecioUnitario(precioUnitario);
+        detalle.setSubtotal(precioUnitario.multiply(BigDecimal.valueOf(cantidad)));
         detalle.setVenta(venta);
         detalle.setProducto(producto);
     }

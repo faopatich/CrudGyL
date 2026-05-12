@@ -29,7 +29,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public List<ClientResponseDto> listar() {
-        return clienteRepository.findByActivoTrue()
+        return clienteRepository.findAllByActivoTrue()
                 .stream()
                 .map(ClienteMapper::toResponseDto)
                 .toList();

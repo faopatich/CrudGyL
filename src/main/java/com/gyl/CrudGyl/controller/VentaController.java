@@ -37,21 +37,6 @@ public class VentaController {
         return ventaService.buscarPorId(idVenta);
     }
 
-    @PutMapping("/{idVenta}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public VentaResponseDto actualizar(
-            @PathVariable Long idVenta,
-            @Valid @RequestBody VentaRequestDto dto
-    ) {
-        return ventaService.actualizar(idVenta, dto);
-    }
-
-    @DeleteMapping("/id/{idVenta}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public void eliminar(@PathVariable Long idVenta) {
-        ventaService.eliminar(idVenta);
-    }
-
     @GetMapping("/cliente/{idCliente}")
     @ResponseStatus(HttpStatus.OK)
     public List<VentaResponseDto> buscarPorCliente(@PathVariable Long idCliente) {

@@ -45,7 +45,7 @@ public class ClienteController {
     }
 
     @DeleteMapping("/id/{idCliente}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void eliminar(@PathVariable Long idCliente) {
         clienteService.eliminar(idCliente);
     }

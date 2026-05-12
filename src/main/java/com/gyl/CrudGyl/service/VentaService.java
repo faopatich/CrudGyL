@@ -13,9 +13,5 @@ public interface VentaService {
 
     VentaResponseDto buscarPorId(Long idVenta);
 
-    VentaResponseDto actualizar(Long idVenta, VentaRequestDto dto);
-
-    void eliminar(Long idVenta);
-
     List<VentaResponseDto> buscarPorCliente(Long idCliente);
 }

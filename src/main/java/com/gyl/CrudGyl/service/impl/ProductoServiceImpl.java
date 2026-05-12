@@ -28,7 +28,7 @@ public class ProductoServiceImpl implements ProductoService {
     }
     @Override
     public List <ProductResponseDto> busquedaPorNombre(String nombre){
-        return productoRepository.findByNombre(nombre)
+        return productoRepository.findByNombreAndActivoTrue(nombre)
                 .stream()
                 .map(ProductoMapper::toResponseDto)
                 .toList();
@@ -52,14 +52,6 @@ public class ProductoServiceImpl implements ProductoService {
     @Override
     public List<ProductResponseDto> listar() {
         return productoRepository.findAll()
-                .stream()
-                .map(ProductoMapper::toResponseDto)
-                .toList();
-    }
-
-    @Override
-    public List<ProductResponseDto> listarActivos() {
-        return productoRepository.findByActivoTrue()
                 .stream()
                 .map(ProductoMapper::toResponseDto)
                 .toList();
